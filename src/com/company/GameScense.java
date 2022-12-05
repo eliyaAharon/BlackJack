@@ -12,6 +12,14 @@ public class GameScense extends JPanel {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
         this.setBackground(new Color(7, 161, 44));
+        //label
+        JLabel betLab = new JLabel();
+        betLab.setBounds(0, 0, 350, 80);
+        Font f = new Font("Monospaced", Font.BOLD, 28);
+        betLab.setFont(f);
+        betLab.setText("Your bet:" + dollarsBet+"💵");
+        betLab.setForeground(Color.white);
+        this.add(betLab);
         // cards
         int[] cards = createCards();
         System.out.println(cards.length);
@@ -23,7 +31,7 @@ public class GameScense extends JPanel {
         int num1 = cards[ran1];
         int num2 = cards[ran2];
         cards[num1] = 0;
-        cards[num2] = 0 ;
+        cards[num2] = 0;
 
 
     }

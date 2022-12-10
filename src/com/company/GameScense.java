@@ -7,6 +7,11 @@ import java.util.Random;
 
 public class GameScense extends JPanel {
 
+    private Player player;
+    private Dealer dealer;
+    private int[] cards = createCards();
+
+
     public GameScense(int x, int y, int width, int height, String dollarsBet) {
         // panel settings
         this.setBounds(x, y, width, height);
@@ -17,23 +22,13 @@ public class GameScense extends JPanel {
         betLab.setBounds(0, 0, 350, 80);
         Font f = new Font("Monospaced", Font.BOLD, 28);
         betLab.setFont(f);
-        betLab.setText("Your bet:" + dollarsBet+"💵");
+        betLab.setText("Your bet:" + dollarsBet + "💵");
         betLab.setForeground(Color.white);
         this.add(betLab);
-        // cards
-        int[] cards = createCards();
-        System.out.println(cards.length);
-        // THe player takes random two cards
-        Random random = new Random();
-
-        int ran1 = random.nextInt(52);
-        int ran2 = random.nextInt(52);
-        int num1 = cards[ran1];
-        int num2 = cards[ran2];
-        cards[num1] = 0;
-        cards[num2] = 0;
-
-
+        // set objects
+        player = new Player();
+        dealer = new Dealer();
+        firstTurn();
     }
 
     public int[] createCards() {
@@ -41,11 +36,21 @@ public class GameScense extends JPanel {
         int startFor = 0;
         for (int i = 1; i < 14; i++) {
             for (int j = startFor; j < startFor + 4; j++) {
-                cards[j] = i;
+                if (i > 10)
+                    cards[j] = 10;
+                else
+                    cards[j] = i;
             }
             startFor += 4;
         }
         return cards;
+    }
+
+    public void firstTurn() {
+        player.hit(cards);
+        player.hit(cards);
+        dealer.hit(cards);
+        dealer.hit(cards);
     }
 
 
